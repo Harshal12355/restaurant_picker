@@ -55,7 +55,7 @@ class _RPickerState extends State<RPicker> {
                     fontSize: 40.0,
                   ),
                 ),
-              SizedBox(height: 1›0.0,),
+              SizedBox(height: 10.0,),
               RaisedButton(
                 child: Text(
                     "Randomize",
