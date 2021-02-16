@@ -25,6 +25,7 @@ class RPicker extends StatefulWidget {
 }
 
 class _RPickerState extends State<RPicker> {
+  String text = 'Text';
   int currentIndex;
   List<String> restaurants = [
     "Govindas",
@@ -94,11 +95,7 @@ class _RPickerState extends State<RPicker> {
         backgroundColor: Colors.red,
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => add()),
-          );
-          restaurants.add;
+          _awaitReturnValueFromSecondScreen(context);
         },
       ),
     );
@@ -117,6 +114,21 @@ class _RPickerState extends State<RPicker> {
     });
   }
 
+  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
+
+    // start the SecondScreen and wait for it to finish with a result
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => add(),
+        ));
+
+    // after the SecondScreen result comes back update the Text widget with it
+    setState(() {
+      text = result;
+      restaurants.add(text);
+    });
+  }
 }
 
 

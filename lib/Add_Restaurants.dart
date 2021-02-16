@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class add extends StatefulWidget {
   @override
@@ -43,10 +44,7 @@ class _addState extends State<add> {
                   ),
                   color: Colors.red,
                   onPressed: () {
-                      setState(() {
-                        restaurant = restaurantCon;
-                        print(restaurant);
-                      });
+                    _sendDataBack(context);
                   },
                 ),
               ],
@@ -55,4 +53,10 @@ class _addState extends State<add> {
       ),
     );
   }
+
+  void _sendDataBack(BuildContext context) {
+    String textToSendBack = restaurantCon.text;
+    Navigator.pop(context, textToSendBack);
+  }
+
 }
