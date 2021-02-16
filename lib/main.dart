@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'Add_Restaurants.dart';
 
 void main() {
   runApp(MyApp());
@@ -92,7 +94,11 @@ class _RPickerState extends State<RPicker> {
         backgroundColor: Colors.red,
         child: Icon(Icons.add),
         onPressed: () {
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => add()),
+          );
+          restaurants.add;
         },
       ),
     );
@@ -110,6 +116,7 @@ class _RPickerState extends State<RPicker> {
       currentIndex = null;
     });
   }
+
 }
 
 
