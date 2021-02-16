@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: RPicker(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -21,7 +23,7 @@ class RPicker extends StatefulWidget {
 }
 
 class _RPickerState extends State<RPicker> {
-
+  int currentIndex;
   List<String> restaurants = [
     "Govindas",
     "Mcdonald\'s",
@@ -44,14 +46,16 @@ class _RPickerState extends State<RPicker> {
 
                 ),
               ),
-              Text(
-                  restaurants[1],
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40.0,
+              Padding(padding: EdgeInsets.only(top: 10.0)),
+              if (currentIndex != null)
+                Text(
+                  restaurants[currentIndex],
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40.0,
+                  ),
                 ),
-              ),
-              SizedBox(height: 30.0,),
+              SizedBox(height: 1›0.0,),
               RaisedButton(
                 child: Text(
                     "Randomize",
@@ -61,13 +65,50 @@ class _RPickerState extends State<RPicker> {
                 ),
                 color: Colors.red,
                 onPressed: () {
+                    updateIndex();
                     print("Randomized");
+                    print(restaurants[currentIndex]);
+                },
+              ),
+              SizedBox(height: 10.0,),
+              RaisedButton(
+                child: Text(
+                  "Reset",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                color: Colors.red,
+                onPressed: () {
+                  resetIndex();
+                  print("Reset");
+                  print(currentIndex);
                 },
               ),
             ],
           ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        child: Icon(Icons.add),
+        onPressed: () {
+
+        },
+      ),
     );
+  }
+
+  void updateIndex(){
+    final random = Random();
+    final index = random.nextInt(restaurants.length);
+    setState(() {
+      currentIndex = index;
+    });
+  }
+  void resetIndex(){
+    setState(() {
+      currentIndex = null;
+    });
   }
 }
 
